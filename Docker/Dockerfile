@@ -31,11 +31,12 @@ RUN sudo ln -s /usr/bin/python3.9 /usr/bin/python
 
 RUN mkdir -p /workspace
 RUN cd workspace && git clone https://github.com/lu-cs-sde/JFeature.git jfeature
-RUN pip install 'numpy==1.19.5' 'pandas==1.1.5' 'matplotlib==3.3.4' 'seaborn==0.11.1' 'ipython==7.16.0' 'PyPDF2==1.26.0' 'tabulate==0.8.9'
+RUN pip install 'numpy==1.19.5' 'pandas==1.1.5' 'matplotlib==3.3.4' 'seaborn==0.11.1' 'ipython==7.16.0' 'PyPDF2==1.26.0' 'Pillow==6.2.2'
 ENV SDKMAN_DIR=/home/SCAM2022/.sdkman
 
 RUN curl -s "https://get.sdkman.io" | bash
-RUN bash -c "source $SDKMAN_DIR/bin/sdkman-init.sh && sdk use java 8.0.275.fx-zulu && ./gradlew build"
+RUN ls
+RUN bash -c "source $SDKMAN_DIR/bin/sdkman-init.sh && sdk install java 8.0.275.fx-zulu && sdk use java 8.0.275.fx-zulu && cd workspace && cd jfeature && ./gradlew build"
 ENV JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 ENV PATH="$JAVA_HOME/bin:~/.sdkman:$PATH"
 
