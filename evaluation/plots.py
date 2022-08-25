@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import os
-from pywaffle import Waffle
+# from pywaffle import Waffle
 
 path = sys.argv[1]
 project = sys.argv[2]
@@ -197,67 +197,67 @@ for i in versions_main.index:
     dict_versions_main[i] = (versions_main.loc[i, "Feature"] / n_row)*100
 
 
-fig = plt.figure(
-    FigureClass=Waffle,
-    plots={
-        311: {
-            'values': dict_versions,
-            'labels': [f"{k} ({round(v,2)}%)" for k,
-                       v in dict_versions.items()],
-            'legend': {
-                'loc': 'upper left',
-                'bbox_to_anchor': (1.05, 1),
-                'fontsize': 8
-            },
-            'title': {
-                'label': 'Java versions used - Total',
-                'loc': 'left'
-            },
-            'colors': [get_color(i) for i in dict_versions.keys()]
-        },
-        312: {
-            'values': dict_versions_tests,
-            'labels': [f"{k} ({round(v,2)}%)" for k,
-                       v in dict_versions_tests.items()],
-            'legend': {
-                'loc': 'upper left',
-                'bbox_to_anchor': (1.2, 1),
-                'fontsize': 8
-            },
-            'title': {
-                'label': 'Java versions used - Test',
-                'loc': 'left'
-            },
-            'colors': [get_color(i) for i in dict_versions_tests.keys()]
-        },
-        313: {
-            'values': dict_versions_main,
-            'labels': [f"{k} ({round(v,2)}%)" for k,
-                       v in dict_versions.items()],
-            'legend': {
-                'loc': 'upper left',
-                'bbox_to_anchor': (1.3, 1),
-                'fontsize': 8
-            },
-            'title': {
-                'label': 'Java versions used - Src',
-                'loc': 'left'
-            },
-            'colors': [get_color(i) for i in dict_versions_main.keys()]
-        },
-    },
-    rows=10,
-    # shared parameter among subplots
-    # colors=("#2196f3", "#ff5252", "#999999"),
-    figsize=(5, 10)  # figsize is a parameter of plt.figure
-)
-# Saving the plot
-plt.savefig(common_prefix + "_waffle.png")
+# fig = plt.figure(
+#     FigureClass=Waffle,
+#     plots={
+#         311: {
+#             'values': dict_versions,
+#             'labels': [f"{k} ({round(v,2)}%)" for k,
+#                        v in dict_versions.items()],
+#             'legend': {
+#                 'loc': 'upper left',
+#                 'bbox_to_anchor': (1.05, 1),
+#                 'fontsize': 8
+#             },
+#             'title': {
+#                 'label': 'Java versions used - Total',
+#                 'loc': 'left'
+#             },
+#             'colors': [get_color(i) for i in dict_versions.keys()]
+#         },
+#         312: {
+#             'values': dict_versions_tests,
+#             'labels': [f"{k} ({round(v,2)}%)" for k,
+#                        v in dict_versions_tests.items()],
+#             'legend': {
+#                 'loc': 'upper left',
+#                 'bbox_to_anchor': (1.2, 1),
+#                 'fontsize': 8
+#             },
+#             'title': {
+#                 'label': 'Java versions used - Test',
+#                 'loc': 'left'
+#             },
+#             'colors': [get_color(i) for i in dict_versions_tests.keys()]
+#         },
+#         313: {
+#             'values': dict_versions_main,
+#             'labels': [f"{k} ({round(v,2)}%)" for k,
+#                        v in dict_versions.items()],
+#             'legend': {
+#                 'loc': 'upper left',
+#                 'bbox_to_anchor': (1.3, 1),
+#                 'fontsize': 8
+#             },
+#             'title': {
+#                 'label': 'Java versions used - Src',
+#                 'loc': 'left'
+#             },
+#             'colors': [get_color(i) for i in dict_versions_main.keys()]
+#         },
+#     },
+#     rows=10,
+#     # shared parameter among subplots
+#     # colors=("#2196f3", "#ff5252", "#999999"),
+#     figsize=(5, 10)  # figsize is a parameter of plt.figure
+# )
+# # Saving the plot
+# plt.savefig(common_prefix + "_waffle.png")
 
 
-# pdfs = [common_prefix + "_features.png", common_prefix + "_waffle.png"]
-# merger = PdfFileMerger()
-# for pdf in pdfs:
-#     merger.append(pdf)
-# merger.write(common_prefix + "_merged.pdf")
-# merger.close()
+# # pdfs = [common_prefix + "_features.png", common_prefix + "_waffle.png"]
+# # merger = PdfFileMerger()
+# # for pdf in pdfs:
+# #     merger.append(pdf)
+# # merger.write(common_prefix + "_merged.pdf")
+# # merger.close()
