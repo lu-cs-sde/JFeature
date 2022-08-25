@@ -92,13 +92,11 @@ zsh run_eval.sh arg
 |:---------------------------|
 |Where arg can be: 'true' will clone all the repositories in 'projects.json' and perform the evaluation, 'false' will just perform the evaluation without cloning the repositories, and 'only' will clone the repositories only without performing the evaluation. |
 
-The results are saved in: `~/workspace/jfeature/evaluation/results/YYYYMMDDHHMMSS`
+The results are saved in: `workspace/jfeature/evaluation/results/YYYYMMDDHHMMSS`
 
-To generate a summary of the results run:
+To generate a summary of the results run in the `evaluation` folder, the following commands:
 
 ```
-cd ~
-cd workspace/jfeature/evaluation/
 python3 table.py results/YYMMDDHHMMSS/
 ```
 This will generate a summary of all the subresults and will save it in `table.txt`.
