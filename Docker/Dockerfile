@@ -14,6 +14,8 @@ RUN apt-get update && apt-get -y install \
     curl \
     unzip \
     zip \
+    cloc \
+    jq \
     python3.9 \
     python3-pip bc sudo
 
@@ -31,7 +33,7 @@ RUN sudo ln -s /usr/bin/python3.9 /usr/bin/python
 
 RUN mkdir -p /workspace
 RUN cd workspace && git clone https://github.com/lu-cs-sde/JFeature.git jfeature
-RUN pip install 'numpy==1.19.5' 'pandas==1.1.5' 'matplotlib==3.3.4' 'seaborn==0.11.1' 'ipython==7.16.0' 'PyPDF2==1.26.0' 'Pillow==6.2.2'
+RUN pip install 'numpy==1.19.5' 'pandas==1.1.5' 'matplotlib==3.3.4' 'seaborn==0.11.1' 'ipython==7.16.0' 'PyPDF2==1.26.0' 'Pillow==6.2.2' 'tabulate==0.8.9'
 ENV SDKMAN_DIR=/home/SCAM2022/.sdkman
 
 RUN curl -s "https://get.sdkman.io" | bash

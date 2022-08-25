@@ -1,14 +1,17 @@
 
-
+|_**Repository**_|[![DOI](https://upload.wikimedia.org/wikipedia/commons/d/df/Figshare_logo.svg)](https://figshare.com/articles/software/jfeature_scam22_tar_gz/20627295)|
+|:------------|---------------|
+|_**Docker image**_|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5296449.svg)](https://doi.org/10.5281/zenodo.5296449)|x
 Software corpora are crucial for evaluating research artifacts and ensuring repeatability of outcomes. _What do we know about these corpora? What do we know about their composition? Are they really suited for our particular problem?_
 
 **JFeature** is an extensible static analysis tool that extracts syntactic and semantic features from Java programs, to assist developers in answering these questions.  
 
 More details can be found in the related paper:
-* __[JFeature: Know Your Corpus](https://github.com/IdrissRio/JFeature/blob/main/jfeature-preprint.pdf)__, _[Idriss Riouak 🔗](https://github.com/IdrissRio), [Görel Hedin 🔗](https://cs.lth.se/gorel-hedin/), [Christoph Reichenbach 🔗](https://creichen.net) and [Niklas Fors 🔗](https://portal.research.lu.se/portal/en/persons/niklas-fors(c1e9efdd-5891-45ec-aa9d-87b8fb7f3dbc).html)_. _[IEEE-SCAM 2022 🔗](http://www.ieee-scam.org/2022/#home)._ 
+* __[JFeature: Know Your Corpus](https://github.com/lu-cs-sde/JFeature/blob/main/preprint.pdf)__, _[Idriss Riouak 🔗](https://github.com/IdrissRio), [Görel Hedin 🔗](https://cs.lth.se/gorel-hedin/), [Christoph Reichenbach 🔗](https://creichen.net) and [Niklas Fors 🔗](https://portal.research.lu.se/portal/en/persons/niklas-fors(c1e9efdd-5891-45ec-aa9d-87b8fb7f3dbc).html)_. _[IEEE-SCAM 2022 🔗](http://www.ieee-scam.org/2022/#home)._ 
 
 
 ---
+
 
 **JFeature** supports twenty-eight different queries and can be easily extend
 with new one. 
@@ -16,7 +19,10 @@ with new one.
 With **JFeature** you can:
   - Analyise and get insight of your own project
   - Analyses corpora and get insight of the each single project in the corups
-  - Perform longitudinal studies (studis over time) of Java projects.
+  - Perform longitudinal studies (studies over time) of Java projects.
+
+# Reusability
+In the paper  __[JFeature: Know Your Corpus](https://github.com/lu-cs-sde/JFeature/blob/main/preprint.pdf)__, Section IV and Section V we discuss how JFeature can be extended and reused for several different purpose. 
 
 
 # Get the JFeature artifact
@@ -57,7 +63,7 @@ git clone https://github.com/lu-cs-sde/JFeature.git
 Once you have cloned the repository
 ```
 cd JFeature/Docker
-docker build -t JFeature:scam22 .
+docker build -t jfeature . --no-cache
 ```
 
 | ⚠️ Note          |
@@ -68,23 +74,35 @@ docker build -t JFeature:scam22 .
 Run the image using:
 
 ```
-docker run  -it --network="host" --expose 9000 --expose 9001 --memory="10g" --memory-swap="16g" jfeature:scam22
+docker run  -it --network="host" --expose 9000 --expose 9001 --memory="10g" --memory-swap="16g" jfeature
 ```
-| ❗️ Very Important ❗️          |
-|:---------------------------|
-| SonarQube requires a high amount of memory. We tested the container with 10GByte of memory and 10GByte of swap memory. If you are running the container from Windows or Mac, the command-line options related to the available memory in the container (i.e., `--memory="10g"`, `--memory-swap="4g"`) are ignored. Please, set these two parameters from the GUI. Read more about it here:  [Windows](https://docs.docker.com/desktop/windows/) - [Mac](https://docs.docker.com/desktop/mac/)|
 
 
-You will be logged in with the user _SCAM22_. Once logged in, run the following commands to launch the evaluation:
+
+Once logged in, run the following commands to launch the evaluation:
 
 ```
 cd workspace/jfeature/
-./run_eval.sh inspector
+./run_eval.sh arg
 
 ```
-The results are saved in: `~/workspace/jfeature/evaluation/YYYYMMDD_HHMMSS`
+| ⚠️ Note          |
+|:---------------------------|
+|Where arg can be: 'true' will clone all the repositories in 'projects.json' and perform the evaluation, 'false' will just perform the evaluation without cloning the repositories, and 'only' will clone the repositories only without performing the evaluation. |
 
+The results are saved in: `~/workspace/jfeature/evaluation/results/YYYYMMDDHHMMSS`
 
+To generate a summary of the resutls run:
+
+```
+cd ~
+cd workspace/jfeature/evaluation/
+python3 table.py restuls/YYMMDDHHMMSS/
+```
+This will generate a summary of all the subresults and will save it in `table.txt`.
+| ⚠️ Note          |
+|:---------------------------|
+|It might take several minutes to run the `table.py` script.|
 
 | ❗️ Very Important ❗️         |
 |:---------------------------|
@@ -98,12 +116,12 @@ To save the results in your own machine, run the following commands in a new bas
 This will print:
 ```
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-4d882c86b5ab   jfeature:scam22   "bash"    x   Up x seconds  random_name
+4d882c86b5ab   jfeature   "bash"    x   Up x seconds  random_name
 ```
 With *your* CONTAINER ID run the following command:
 
 ```
-docker cp 4d882c86b5ab:workspace/jfeature/evaluation/YYYYMMDD_HHMMSS /PATH/IN/YOUR/MACHINE
+docker cp 4d882c86b5ab:workspace/jfeature/evaluation/YYYYMMDDHHMMSS /PATH/IN/YOUR/MACHINE
 ```
 
 
@@ -155,19 +173,16 @@ To generate the JARs necessary for the evaluation, execute
 ./gradlew build
 ```
 
-To run all the tests, execute:
-
-```
-./gradlew test
-```
+| ⚠️ Note          |
+|:---------------------------|
+|See section 'Run the Image' to know how reproduce the results|
 
 ### Python Dependencies
 
 To install Python dependencies, you can execute the following instruction:
 
 ```
-cd resources
-pip3 install - requirements.txt
+pip install 'numpy==1.19.5' 'pandas==1.1.5' 'matplotlib==3.3.4' 'seaborn==0.11.1' 'ipython==7.16.0' 'PyPDF2==1.26.0' 'Pillow==6.2.2' 'tabulate==0.8.9'
 ```
 
 ---
@@ -219,13 +234,13 @@ The directory is structured as follow:
     ├── projects.json                        # Containing details about corpora's projects 
     ├── run_eval.sh                          # Evaluation entry-point script              
     ├── table.py                             # Python script used to collect data
-    └── YYYYMMDD_HHMMSS                      # Evaluation results
+    └── results/YYYYMMDDHHMMSS               # Evaluation results
 
 
 
 ---
 # Related repository repositories/links 🔗
- - 🔗 **[JastAdd](https://jastadd.org)**: meta-compilation system that supports Reference Attribute Grammars. We used a custom [JastAdd](https://bitbucket.org/jastadd/jastadd2/src/f00c118684f4cc9b42931b5a491046e41d68b6bf/) version which better supports interfaces.
+ - 🔗 **[JastAdd](https://jastadd.org)**: meta-compilation system that supports Reference Attribute Grammars. 
  - 🔗 **[ExtendJ](https://extendj.org)**: extensible Java compiler built using JastAdd. We built **JFeature** as an Static Analysis Extension of ExtendJ. More can be found [here](https://bitbucket.org/extendj/analysis-template/src/master/). 
  - 🔗 **[DaCapo](https://dacapo-bench.org/)**: Blackburn et al. introduced it in 2006 as a set of general-purpose (i.e., library), freely available, real-world Java applications. They provided performance measurements and workload characteristics, such as object size distributions, allocation rates and live sizes. Even if the primary goal of the
 DaCapo Benchmark Suite is intended as a corpus for Java benchmarking, there are
