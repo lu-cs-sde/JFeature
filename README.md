@@ -54,7 +54,7 @@ Download the pre-built image [here](https://figshare.com/articles/software/jfeat
 Then, anywhere in your workspace run
 
 ```
-docker load << Downloads/jfeature_scam22.tar.gz
+docker load < Downloads/jfeature_scam22.tar.gz
 ```
 
 ## Build your own Docker image
@@ -84,7 +84,7 @@ docker run  -it --network="host" --expose 9000 --expose 9001 --memory="10g" --me
 Once logged in, run the following commands to launch the evaluation:
 
 ```
-cd workspace/jfeature/
+cd workspace/jfeature/evaluation
 ./run_eval.sh arg
 
 ```
@@ -94,7 +94,7 @@ cd workspace/jfeature/
 
 The results are saved in: `~/workspace/jfeature/evaluation/results/YYYYMMDDHHMMSS`
 
-To generate a summary of the resutls run:
+To generate a summary of the results run:
 
 ```
 cd ~
