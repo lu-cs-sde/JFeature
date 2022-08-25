@@ -1,7 +1,9 @@
 
-|_**Repository**_|[![DOI](https://upload.wikimedia.org/wikipedia/commons/d/df/Figshare_logo.svg)](https://figshare.com/articles/software/jfeature_scam22_tar_gz/20627295)|
+|_**Docker Image**_|[![DOI](https://upload.wikimedia.org/wikipedia/commons/d/df/Figshare_logo.svg)](https://figshare.com/articles/software/jfeature_scam22_tar_gz/20627295)|
 |:------------|---------------|
-|_**Docker image**_|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5296449.svg)](https://doi.org/10.5281/zenodo.5296449)|x
+|_**Repository**_|[![DOI]()](TO be addedd)|x
+
+
 Software corpora are crucial for evaluating research artifacts and ensuring repeatability of outcomes. _What do we know about these corpora? What do we know about their composition? Are they really suited for our particular problem?_
 
 **JFeature** is an extensible static analysis tool that extracts syntactic and semantic features from Java programs, to assist developers in answering these questions.  
