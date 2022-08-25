@@ -50,7 +50,7 @@ Users of other distributions can download [pre-compiled binaries](https://docs.d
 
 
 ## Download pre-built Docker image
-Download the pre-built image [here](TODO: ADD ZENODO LINK).
+Download the pre-built image [here](https://figshare.com/articles/software/jfeature_scam22_tar_gz/20627295).
 Then, anywhere in your workspace run
 
 ```
