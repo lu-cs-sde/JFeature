@@ -85,7 +85,7 @@ Once logged in, run the following commands to launch the evaluation:
 
 ```
 cd workspace/jfeature/evaluation
-./run_eval.sh arg
+zsh run_eval.sh arg
 
 ```
 | ⚠️ Note          |
