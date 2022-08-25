@@ -1,0 +1,115 @@
+plugins {
+  id 'java'
+  id 'org.jastadd' version '1.13.3'
+}
+
+defaultTasks 'jar'
+
+if (!file('extendj/jastadd_modules').exists()) {
+  throw new GradleException('ExtendJ seems to be missing. Please run "git submodule init", then "git submodule update".')
+}
+
+jastadd {
+  configureModuleBuild()
+
+  modules {
+    include("extendj/jastadd_modules") // Include core ExtendJ modules.
+
+    module "feature", {
+      imports "java8 frontend" 
+
+      jastadd {
+        basedir "src/jastadd/"
+        include "**/*.jrag"
+      }
+    }
+  }
+
+  // Target module to build:
+  module = 'feature'
+  jastaddOptions = [ "--rewrite=cnta",
+                    "--safeLazy",
+                    "--visitCheck=false"]
+  astPackage = 'org.extendj.ast'
+  parser.name = 'JavaParser'
+  scanner.name = 'OriginalScanner'
+}
+
+sourceSets.main {
+  java {
+    srcDir 'extendj/src/frontend-main'
+    srcDir 'src/java'
+  }
+  resources {
+    srcDir 'extendj/src/res'
+    srcDir jastadd.buildInfoDir
+  }
+
+    repositories {
+    mavenLocal()
+    flatDir { dirs "tools" }
+  }
+  dependencies {
+    testImplementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+    jastadd2 name: "jastadd2"
+  }
+}
+
+sourceSets.test{
+  java{
+    srcDir 'src/java/test/'
+  }
+}
+
+test {
+   useJUnit()
+
+  testLogging.events 'passed', 'failed'
+
+  testLogging.exceptionFormat = 'full'
+
+  dependsOn 'cleanTest'
+}
+
+task app(type: Jar) {
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  from sourceSets.main.output
+  manifest {
+      attributes 'Main-Class': 'org.extendj.App'
+  }
+  baseName = 'fe'
+  destinationDir=projectDir
+}
+
+artifacts {
+    archives app
+
+}
+
+// Java -source and -target version.
+sourceCompatibility = targetCompatibility = '1.8'
+
+task sourceZip(type: Zip) {
+  description 'Builds a Zip file with the entire repisotory (including the ExtendJ submodule).'
+  destinationDir = projectDir
+  archiveName = "template-src.zip"
+
+  from (projectDir) {
+    exclude '**/.git'
+    exclude '**/.gitignore'
+    exclude '**/.gitattributes'
+    exclude '**/.gitmodules'
+    exclude 'build'
+    exclude 'bin'
+    exclude '.gradle'
+    exclude '.classpath'
+    exclude '.settings'
+    exclude '.project'
+    exclude '*.jar'
+    exclude '*.zip'
+    exclude '**/*.swp'
+  }
+
+  into 'Feature'
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/env groovy
+
+// Builds ExtendJ with Gradle and installs Maven artifacts.
+pipeline {
+  agent any
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
+
+  tools {
+    jdk 'oracle-jdk-8'
+  }
+
+  stages {
+    stage('Clean') {
+      steps {
+        sh './gradlew clean'
+      }
+    }
+
+    stage('Install') {
+      steps {
+        sh './gradlew install'
+      }
+    }
+  }
+}
