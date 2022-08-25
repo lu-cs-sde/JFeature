@@ -99,7 +99,7 @@ To generate a summary of the results run:
 ```
 cd ~
 cd workspace/jfeature/evaluation/
-python3 table.py restuls/YYMMDDHHMMSS/
+python3 table.py results/YYMMDDHHMMSS/
 ```
 This will generate a summary of all the subresults and will save it in `table.txt`.
 | ⚠️ Note          |
