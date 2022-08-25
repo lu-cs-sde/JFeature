@@ -204,7 +204,7 @@ for ((i = 0; i < $count; i++)); do
    folder=$name
    iter=0
    if [[ "$TYPE_OF_EVAL" = "inspector" ]]; then
-      java -Xss8192M -Xms128g -jar ../fe.jar -classpath $classpath $all_files -prjname=$name  2> /dev/null || true
+      java -Xss8192M -Xms128g -jar ../fe.jar -classpath $classpath $all_files -prjname=$name 2>/dev/null || true
       mv $name"features.csv" $EVAL_DIR
       info="Plotting the results $name"
       log_info

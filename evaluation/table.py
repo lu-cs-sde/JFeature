@@ -80,3 +80,11 @@ print(tabulate(df_features, headers='keys', tablefmt='psql'))
 
 print(tabulate(df_final, headers='keys', tablefmt='plain'))
 print(tabulate(df_features, headers='keys', tablefmt='plain'))
+
+
+# Save tabulate output to a file
+with open(output_dir + "/table.txt", "w") as f:
+    f.write(tabulate(df_final, headers='keys', tablefmt='plain'))
+    f.write("\n")
+    f.write(tabulate(df_features, headers='keys', tablefmt='plain'))
+    f.close()
