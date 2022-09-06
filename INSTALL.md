@@ -20,6 +20,11 @@ Then, anywhere in your workspace run
 ```
 docker load << Downloads/jfeature_scam22.tar.gz
 ```
+🛠 Troubleshooting
+| ERROR |     SOLUTION    |
+|:-------------------|--------|
+| `Got permission denied while trying to connect to the Docker daemon socket at unix`.| Run the command as super user preappending `sudo` |
+| If the error persits| Run the following commands (checkout [this](https://linuxhandbook.com/docker-permission-denied/) guide): `sudo groupadd docker`, `sudo usermod -aG docker $USER` |
 
 ## Build your own Docker image
 Clone the JFeature repository by running the following command:
@@ -35,6 +40,14 @@ docker build -t jfeature . --no-cache
 | ⚠️ Note          |
 |:---------------------------|
 |It might take several minutes to build the Docker image.|
+
+
+*Optional:*  Save the image as `.tar` file:
+```
+docker save jfeature | gzip > jfeature_scam22.tar.gz
+```
+
+
 ## Run the image
 
 Run the image using:
@@ -54,9 +67,9 @@ zsh run_eval.sh arg
 ```
 
 Where arg can be: 
-* 'true' will clone all the repositories in 'projects.json' and perform the evaluation, 
-*  'false' will just perform the evaluation without cloning the repositories, and 
-*  'only' will clone the repositories only without performing the evaluation. 
+* `true` will clone all the repositories in 'projects.json' and perform the evaluation, 
+* `false` will just perform the evaluation without cloning the repositories, and 
+* `only` will clone the repositories only without performing the evaluation. 
   
 
 | ❗️ Very Important ❗️         |
@@ -65,12 +78,10 @@ Where arg can be:
 
 The results are saved in: `~/workspace/jfeature/evaluation/results/YYYYMMDDHHMMSS`
 
-To generate a summary of the resutls run:
+To generate a summary of the results run from the `evaluation` directory the following command:
 
 ```
-cd ~
-cd workspace/jfeature/evaluation/
-python3 table.py restuls/YYMMDDHHMMSS/
+python3 table.py results/YYMMDDHHMMSS/
 ```
 This will generate a summary of all the subresults and will save it in `table.txt`.
 | ⚠️ Note          |
@@ -79,7 +90,7 @@ This will generate a summary of all the subresults and will save it in `table.tx
 
 | ❗️ Very Important ❗️         |
 |:---------------------------|
- |Do not close the bash nor kill the container! The results will be lost!|
+ |Do not close the bash nor kill the container or the results will be lost!|
 
 ## Saving the results
 To save the results in your own machine, run the following commands in a new bash:
