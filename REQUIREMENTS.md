@@ -5,7 +5,7 @@ The three installation methods (see INSTALL.md), were tested on:
 |-----------------------------|---------------------------------|-------------|---------|-------------------------------------|
 | MacBook Pro (16-inch, 2019) | 2,6 GHz, 6-Core Intel Core i7   | 16 GiB DDR4 | 500 GiB | macOS Monterey 12.5.1               |
 | MacBook Pro (16-inch, 2021) | Apple M1 Pro                    | 16 GiB      | 1 TiB   | macOS Monterey 12.2.1               |
-| 2 Benchmarking Machine      | 3.6 GHz, 8-Core Intel i7-11700K | 128GiB DDR4 | 1TiB    | Linux version 5.13.7-051307-generic |
+| 2 Benchmarking Machines      | 3.6 GHz, 8-Core Intel i7-11700K | 128GiB DDR4 | 1TiB    | Linux version 5.13.7-051307-generic |
 
 | ⚠️ Note          |
 |:---------------------------|
