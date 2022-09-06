@@ -12,10 +12,14 @@ The three installation methods (see INSTALL.md), were tested on:
 |If you wish to duplicate the evaluation findings, we recommend allocating a minimum of 100 Gigabytes of memory. The evaluation scripts will download more than one hundred repositories. |
 
 
+
 ---
 
 
 # Requirements
+
+* `zsh` for Ubuntu: zsh 5.8 (x86_64-ubuntu-linux-gnu)
+* `zsh` for MacOS: zsh 5.8.1 (x86_64-apple-darwin21.0)
 
 ## Docker
 
@@ -51,6 +55,8 @@ To run the evaluation you need:
   sdk install java 8.0.275.fx-zulu
   sdk use java 8.0.275.fx-zulu
   ```
+
+
 
 ## Python (3.9.13) Dependencies
 | ⚠️ Note          |
