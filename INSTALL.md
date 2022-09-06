@@ -14,7 +14,7 @@ We provide three different ways of getting and running **JFeature**:
 # Docker
 
 ## Download pre-built Docker image
-Download the pre-built image [here](https://github.com/lu-cs-sde/JFeature).
+Download the pre-built image [here](https://zenodo.org/record/7053443#.Yxcy5-xByAk).
 Then, anywhere in your workspace run
 
 ```
