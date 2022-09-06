@@ -40,7 +40,7 @@ docker build -t jfeature . --no-cache
 Run the image using:
 
 ```
-docker run  -it --network="host" --expose 9000 --expose 9001 --memory="100g" --memory-swap="16g" jfeature
+docker run  -it --network="host" --expose 9000 --expose 9001 --memory="10g" --memory-swap="16g" jfeature
 ```
 
 
