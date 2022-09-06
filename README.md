@@ -1,4 +1,7 @@
 
+|_**Docker Image**_|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7053266.svg)](https://doi.org/10.5281/zenodo.7053266)|
+|:------------|---------------|
+|_**Repository**_|[This one](https://github.com/lu-cs-sde/JFeature)|x
 
 
 Software corpora are crucial for evaluating research artifacts and ensuring repeatability of outcomes. _What do we know about these corpora? What do we know about their composition? Are they really suited for our particular problem?_
