@@ -204,7 +204,7 @@ for ((i = 0; i < $count; i++)); do
    folder=$name
    iter=0
    if [[ "$TYPE_OF_EVAL" = "inspector" ]]; then
-      java -Xss8192M -Xms128g -jar ../fe.jar -classpath $classpath $all_files -prjname=$name 2>/dev/null || true
+      java -jar ../fe.jar -classpath $classpath $all_files -prjname=$name 2>/dev/null || true
       mv $name"features.csv" $EVAL_DIR
       info="Plotting the results $name"
       log_info
@@ -246,7 +246,7 @@ for ((i = 0; i < $count; i++)); do
             fi
          done
          name=$folder"_"$iter"_"$commit
-         java -Xss1024M -jar ../fe.jar -classpath $classpath $all_files -prjname=$name
+         java -jar ../fe.jar -classpath $classpath $all_files -prjname=$name
          mv $name"features.csv" $EVAL_DIR
          info="Plotting the results $name"
          log_info

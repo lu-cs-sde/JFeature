@@ -61,7 +61,7 @@ docker run  -it --network="host" --expose 9000 --expose 9001 --memory="10g" --me
 Once logged in, run the following commands to launch the evaluation:
 
 ```
-cd workspace/jfeature/
+cd workspace/jfeature/evaluation
 zsh run_eval.sh arg
 
 ```
