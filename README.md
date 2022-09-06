@@ -1,7 +1,7 @@
 
 |_**Docker Image**_|[![DOI](https://upload.wikimedia.org/wikipedia/commons/d/df/Figshare_logo.svg)](https://figshare.com/articles/software/jfeature_scam22_tar_gz/20627295)|
 |:------------|---------------|
-|_**Repository**_|[![DOI](https://zenodo.org/badge/392981505.svg)](https://zenodo.org/record/7022676#.Ywd2kOxBx7Y)|x
+|_**Repository**_|[![DOI](https://zenodo.org/badge/392981505.svg)](https://zenodo.org/badge/latestdoi/392981505)|x
 
 
 Software corpora are crucial for evaluating research artifacts and ensuring repeatability of outcomes. _What do we know about these corpora? What do we know about their composition? Are they really suited for our particular problem?_
@@ -27,166 +27,16 @@ With **JFeature** you can:
 In the paper  __[JFeature: Know Your Corpus](https://github.com/lu-cs-sde/JFeature/blob/main/preprint.pdf)__, Section IV and Section V we discuss how JFeature can be extended and reused for several different purpose. 
 
 
-# Get the JFeature artifact
+# Requirements
+Before getting **JFeature**, ensure that your machine meets all hardware and software requirements described in [REQUIREMENTS.md](https://github.com/lu-cs-sde/JFeature/blob/main/REQUIREMENTS.md).
+
+# Get JFeature 
 We provide three different ways of getting and running **JFeature**:
   * You can download the pre-built Docker image (recommended).  
   * Build your own Docker image using the Dockerfile script.
   * Download and build **JFeature** from the artifact source code.
 
-
-# Docker
-
-We provide a [Docker](https://www.docker.com) image that contains *JFeature* and evaluation scripts, packaged together with all the necessary dependencies.
-To run such an image, make sure to install the relevant tools:
-
-* For Windows and OS X systems, follow the guidelines on the [Docker desktop download site](https://www.docker.com/products/docker-desktop)
-
-* On Linux-based systems, install the docker command-line tool. This tool may be provided by the docker.io and/or docker-ce packages. If your distribution does not provide these packages, follow the steps here:
-  * For [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-  * For [Debian](https://docs.docker.com/engine/install/debian/)
-  * For [CentOS](https://docs.docker.com/engine/install/centos/)
-  * For [Fedora](https://docs.docker.com/engine/install/fedora/)
-Users of other distributions can download [pre-compiled binaries](https://docs.docker.com/engine/install/binaries/) or build Docker from [source](https://github.com/docker) (both "cli" and "engine")
-
-
-## Download pre-built Docker image
-Download the pre-built image [here](https://figshare.com/articles/software/jfeature_scam22_tar_gz/20627295).
-Then, anywhere in your workspace run
-
-```
-docker load < Downloads/jfeature_scam22.tar.gz
-```
-
-## Build your own Docker image
-Clone the JFeature repository by running the following command:
-```
-git clone https://github.com/lu-cs-sde/JFeature.git
-```
-Once you have cloned the repository
-```
-cd JFeature/Docker
-docker build -t jfeature . --no-cache
-```
-
-| ⚠️ Note          |
-|:---------------------------|
-|It might take several minutes to build the Docker image.|
-## Run the image
-
-Run the image using:
-
-```
-docker run  -it --network="host" --expose 9000 --expose 9001 --memory="10g" --memory-swap="16g" jfeature
-```
-
-
-
-Once logged in, run the following commands to launch the evaluation:
-
-```
-cd workspace/jfeature/evaluation
-zsh run_eval.sh arg
-
-```
-| ⚠️ Note          |
-|:---------------------------|
-|Where arg can be: 'true' will clone all the repositories in 'projects.json' and perform the evaluation, 'false' will just perform the evaluation without cloning the repositories, and 'only' will clone the repositories only without performing the evaluation. |
-
-The results are saved in: `workspace/jfeature/evaluation/results/YYYYMMDDHHMMSS`
-
-To generate a summary of the results run in the `evaluation` folder, the following commands:
-
-```
-python3 table.py results/YYMMDDHHMMSS/
-```
-This will generate a summary of all the subresults and will save it in `table.txt`.
-| ⚠️ Note          |
-|:---------------------------|
-|It might take several minutes to run the `table.py` script.|
-
-| ❗️ Very Important ❗️         |
-|:---------------------------|
- |Do not close the bash nor kill the container! The results will be lost!|
-
-## Saving the results
-To save the results in your own machine, run the following commands in a new bash:
-```
-> docker ps
-```
-This will print:
-```
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-4d882c86b5ab   jfeature   "bash"    x   Up x seconds  random_name
-```
-With *your* CONTAINER ID run the following command:
-
-```
-docker cp 4d882c86b5ab:workspace/jfeature/evaluation/YYYYMMDDHHMMSS /PATH/IN/YOUR/MACHINE
-```
-
-
-
-# Build JFeature from the source code
-## Prerequisites
-
-We have run JFeature on the following Java version:
-
-*  **Java SDK version 8**. (tested with  SDK 8.0.275.fx-zulu. See [sdkman](https://sdkman.io)).
-
-
-The evaluation script uses `sdkman`.
-To run the evaluation you need:
-* The scripts `eval.sh` and `evaluation/run_eval.sh` uses `sdkman`. If you don't have `sdkman` installed but have Java SDK 8 installed, you can comment all the lines starting with `sdk` in `eval.sh` and in `evaluation/run_eval.sh`. You install `sdkman` by running the following commands:
-
-  ```
-  curl -s "https://get.sdkman.io" | bash
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-  sdk install java 8.0.275.fx-zulu
-  sdk use java 8.0.275.fx-zulu
-  ```
-
-To install all the necessary Python dependencies, you can run the instruction described in the next section.
-
-
-## Build
-To clone the **JFeature** code, run, in your working directory:
-```
-git clone https://github.com/lu-cs-sde/JFeature.git
-```
-
-Move to the **JFeature** directory:
-
-```
-cd JFeature
-```
-
-Clone all the submodules:
-
-```
-git submodule update
-git submodule init
-```
-
-To generate the JARs necessary for the evaluation, execute
-
-```
-./gradlew build
-```
-
-| ⚠️ Note          |
-|:---------------------------|
-|See section 'Run the Image' to know how reproduce the results|
-
-### Python Dependencies
-
-To install Python dependencies, you can execute the following instruction:
-
-```
-pip install 'numpy==1.19.5' 'pandas==1.1.5' 'matplotlib==3.3.4' 'seaborn==0.11.1' 'ipython==7.16.0' 'PyPDF2==1.26.0' 'Pillow==6.2.2' 'tabulate==0.8.9'
-```
-
----
-
+The three different steps are described in [INSTALL.md](https://github.com/lu-cs-sde/JFeature/blob/main/INSTALL.md).
 
 
 ### Repository overview
