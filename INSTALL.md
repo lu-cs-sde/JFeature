@@ -18,7 +18,7 @@ Download the pre-built image [here](https://github.com/lu-cs-sde/JFeature).
 Then, anywhere in your workspace run
 
 ```
-docker load << Downloads/jfeature_scam22.tar.gz
+docker load < Downloads/jfeature_scam22.tar.gz
 ```
 🛠 Troubleshooting
 | ERROR |     SOLUTION    |
