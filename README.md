@@ -1,7 +1,7 @@
 
-|_**Docker Image**_|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7053266.svg)](https://doi.org/10.5281/zenodo.7053266)|
+|_**Docker Image**_|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7053443.svg)](https://doi.org/10.5281/zenodo.7053443)|
 |:------------|---------------|
-|_**Repository**_| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7053313.svg)](https://doi.org/10.5281/zenodo.7053313)|x
+|_**Repository**_| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7053469.svg)](https://doi.org/10.5281/zenodo.7053469)|x
 
 
 Software corpora are crucial for evaluating research artifacts and ensuring repeatability of outcomes. _What do we know about these corpora? What do we know about their composition? Are they really suited for our particular problem?_
